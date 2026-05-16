@@ -26,6 +26,7 @@ public class DataController {
     public TableView <DataPackage> dataPackageTableView;
     public ComboBox <String> filterValidityComboBox;
     public TextField maxPriceTextField;
+    public Label reportlabel;
 
 
     public void initialize(){
@@ -121,5 +122,19 @@ public class DataController {
         }
         dataPackageTableView.getItems().clear();
         dataPackageTableView.getItems().addAll(filterDataPackageList);
+    }
+
+    public void handleFindBestValuePackageButton(ActionEvent actionEvent) {
+        double pricePerGB = 0;
+        double pricePerGbTemp;
+        DataPackage bestPackage;
+        for(DataPackage dp: dataPackageList){
+            pricePerGbTemp = dp.getPrice()/dp.getDataAmount();
+            if(pricePerGbTemp<pricePerGB ){
+                pricePerGB =pricePerGbTemp;
+                bestPackage=dp;
+            }
+        }
+        //reportlabel.setText(bestPackage.toString());
     }
 }
