@@ -33,11 +33,11 @@ public class DataController {
     ArrayList<DataPackage> dataPackageList = new ArrayList<>();
 
     public void handleCreatePackageButton(ActionEvent actionEvent) {
-        if(packageNameTextField.getText().isEmpty()){
+        if(packageNameTextField.getText().trim().isEmpty()){
             errorText.setText("Plz Enter a package name!");
             return;
         }
-        if(dataAmountTextField.getText().isEmpty()){
+        if(dataAmountTextField.getText().trim().isEmpty()){
             errorText.setText("PLZ Enter a data amount");
             return;
         }
