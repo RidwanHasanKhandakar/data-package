@@ -29,14 +29,14 @@
       <Line endX="290.00006103515625" endY="-11.001632690429688" layoutX="310.0" layoutY="213.0" startX="-310.0" startY="-11.067764282226562" stroke="WHITE" strokeWidth="5.0" />
       <Button layoutX="253.0" layoutY="164.0" mnemonicParsing="false" onAction="#handleCreatePackageButton" text="Create Package" />
       <Label fx:id="errorText" layoutX="383.0" layoutY="168.0" prefHeight="18.0" prefWidth="191.0" />
-      <TableView layoutX="20.0" layoutY="214.0" prefHeight="172.0" prefWidth="563.0">
+      <TableView fx:id="dataPackageTableView" layoutX="20.0" layoutY="214.0" prefHeight="172.0" prefWidth="563.0">
         <columns>
           <TableColumn fx:id="PackageNameCol" prefWidth="101.60003471374512" text="Name" />
           <TableColumn fx:id="datAmountCol" prefWidth="87.99994659423828" text="Amount" />
             <TableColumn fx:id="priceCol" prefWidth="108.79998779296875" text="Price" />
             <TableColumn fx:id="validityCol" prefWidth="50.4000244140625" text="Validity" />
             <TableColumn fx:id="availabilityCol" prefWidth="102.4000244140625" text="Availability" />
-            <TableColumn fx:id="offerendsCol" prefWidth="108.80000610351567" text="Offer Ends" />
+            <TableColumn fx:id="offerEndsCol" prefWidth="108.80000610351567" text="Offer Ends" />
         </columns>
       </TableView>
    </children>
