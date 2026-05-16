@@ -24,7 +24,8 @@ public class DataController {
     //public TableColumn <DataPackage, LocalDate> offerendsCol;
     public TableColumn <DataPackage,LocalDate> offerEndsCol;
     public TableView <DataPackage> dataPackageTableView;
-
+    public ComboBox <String> filterValidityComboBox;
+    public TextField maxPriceTextField;
 
 
     public void initialize(){
@@ -37,6 +38,12 @@ public class DataController {
         availabilityComboBox.getItems().addAll("App only",
                 "Recharge only",
                 "App & recharge");
+
+        filterValidityComboBox.getItems().addAll("3 days",
+                "7 days",
+                "15 days",
+                "30 days",
+                "Unlimited");
 
         PackageNameCol.setCellValueFactory(new PropertyValueFactory<>("packageName"));
         datAmountCol.setCellValueFactory(new PropertyValueFactory<>("dataAmount"));
@@ -95,5 +102,24 @@ public class DataController {
     //show pack on table
     dataPackageTableView.getItems().clear();
     dataPackageTableView.getItems().addAll(dataPackageList);
+    }
+
+    public void handleResetFilterButton(ActionEvent actionEvent) {
+        dataPackageTableView.getItems().clear();
+        dataPackageTableView.getItems().addAll(dataPackageList);
+    }
+
+    public void handleFilterButton(ActionEvent actionEvent) {
+        ArrayList<DataPackage> filterDataPackageList = new ArrayList<>();
+        String filterValidity = filterValidityComboBox.getValue();
+        double maxPrice = Double.parseDouble(maxPriceTextField.getText());
+
+        for(DataPackage dp : dataPackageList){
+            if(filterValidity.equals(dp.getValidity())&&(dp.getPrice()<=maxPrice)){
+                filterDataPackageList.add(dp);
+            }
+        }
+        dataPackageTableView.getItems().clear();
+        dataPackageTableView.getItems().addAll(filterDataPackageList);
     }
 }
