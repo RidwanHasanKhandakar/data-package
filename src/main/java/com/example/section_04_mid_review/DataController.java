@@ -2,6 +2,7 @@ package com.example.section_04_mid_review;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -36,6 +37,13 @@ public class DataController {
         availabilityComboBox.getItems().addAll("App only",
                 "Recharge only",
                 "App & recharge");
+
+        PackageNameCol.setCellValueFactory(new PropertyValueFactory<>("packageName"));
+        datAmountCol.setCellValueFactory(new PropertyValueFactory<>("dataAmount"));
+        validityCol.setCellValueFactory(new PropertyValueFactory<>("validity"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        availabilityCol.setCellValueFactory(new PropertyValueFactory<>("availability"));
+        offerEndsCol.setCellValueFactory(new PropertyValueFactory<>("offerEnds"));
     }
 
     ArrayList<DataPackage> dataPackageList = new ArrayList<>();
@@ -65,18 +73,27 @@ public class DataController {
             errorText.setText("plz enter a date");
             return;
         }
+
         for(DataPackage dp : dataPackageList){
             if(dp.getPackageName().equals(packageNameTextField.getText())){
                 errorText.setText("data package with same name!");
                 return;
             }
         }
+
         String packageName = packageNameTextField.getText();
         double dataAmount = Double.parseDouble(dataAmountTextField.getText());
         String validity = validityComboBox.getValue();
         double price = Double.parseDouble(priceTextField.getText());
         String availability = availabilityComboBox.getValue();
         LocalDate offerEnds = offerEndsDatePIcker.getValue();
-        errorText.setText("DataPackage Saved!");
+
+        DataPackage dp = new DataPackage(packageName,dataAmount,validity,price,availability,offerEnds);
+        dataPackageList.add(dp);
+
+    errorText.setText("DataPackage Saved!");
+    //show pack on table
+    dataPackageTableView.getItems().clear();
+    dataPackageTableView.getItems().addAll(dataPackageList);
     }
 }
