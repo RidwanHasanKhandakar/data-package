@@ -27,7 +27,12 @@ public class DataController {
 
 
     public void initialize(){
-
+        //comboBox
+        validityComboBox.getItems().addAll("3 days",
+                "7 days",
+                "15 days",
+                "30 days",
+                "Unlimited");
     }
 
     ArrayList<DataPackage> dataPackageList = new ArrayList<>();
@@ -39,6 +44,14 @@ public class DataController {
         }
         if(dataAmountTextField.getText().trim().isEmpty()){
             errorText.setText("PLZ Enter a data amount");
+            return;
+        }
+        if(priceTextField.getText().trim().isEmpty()){
+            errorText.setText("Enter a price");
+            return;
+        }
+        if(validityComboBox.getValue()==null){
+            errorText.setText("plz select a validity!");
             return;
         }
         errorText.setText("DataPackage Saved!");
