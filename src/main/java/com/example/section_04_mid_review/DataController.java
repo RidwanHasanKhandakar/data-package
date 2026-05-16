@@ -33,6 +33,9 @@ public class DataController {
                 "15 days",
                 "30 days",
                 "Unlimited");
+        availabilityComboBox.getItems().addAll("App only",
+                "Recharge only",
+                "App & recharge");
     }
 
     ArrayList<DataPackage> dataPackageList = new ArrayList<>();
@@ -54,6 +57,26 @@ public class DataController {
             errorText.setText("plz select a validity!");
             return;
         }
+        if(availabilityComboBox.getValue()==null){
+            errorText.setText("plz select a availability");
+            return;
+        }
+        if(offerEndsDatePIcker.getValue()==null){
+            errorText.setText("plz enter a date");
+            return;
+        }
+        for(DataPackage dp : dataPackageList){
+            if(dp.getPackageName().equals(packageNameTextField.getText())){
+                errorText.setText("data package with same name!");
+                return;
+            }
+        }
+        String packageName = packageNameTextField.getText();
+        double dataAmount = Double.parseDouble(dataAmountTextField.getText());
+        String validity = validityComboBox.getValue();
+        double price = Double.parseDouble(priceTextField.getText());
+        String availability = availabilityComboBox.getValue();
+        LocalDate offerEnds = offerEndsDatePIcker.getValue();
         errorText.setText("DataPackage Saved!");
     }
 }
